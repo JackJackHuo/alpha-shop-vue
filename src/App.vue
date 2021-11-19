@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="AlphaShop">
+    <body>
+      <!-- nav-toggle -->
+      <!-- 為了要隱藏main將hambergur移至跟main同一層 -->
+      <input
+        type="checkbox"
+        name="nav__toggle"
+        id="nav__toggle"
+        class="nav__toggle"
+      />
+      <label for="nav__toggle" class="nav__toggle__label"
+        ><span class="hamburger"></span
+      ></label>
+      <!-- navbar -->
+      <Navbar />
+      <!-- main -->
+      <router-view />
+      <!-- footer -->
+      <Footer />
+    </body>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
 
+<script>
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Navbar,
+    Footer,
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+@import "./scss/style";
 </style>
