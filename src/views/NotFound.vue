@@ -7,3 +7,9 @@ export default {
   name: 'NotFound'
 }
 </script>
+
+<style scoped>
+h1{
+  margin-top: 5rem;
+}
+</style>
