@@ -38,3 +38,19 @@
   grid-template-columns: repeat ( 12 , 1fr );
 }
 
+%flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@mixin overflow-clamp{
+  display: -webkit-box; 
+  -webkit-box-orient: vertical; 
+  -webkit-line-clamp: 1; 
+  overflow: hidden;
+}
+%overflow-clamp{
+  @include overflow-clamp;
+}

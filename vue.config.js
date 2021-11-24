@@ -9,6 +9,7 @@ module.exports = {
           @import "@/scss/_color.scss";
           @import "@/scss/_reset.scss";
           @import "@/scss/_extend.scss";
+          @import "@/scss/_mixin.scss";
         `
       }
     }

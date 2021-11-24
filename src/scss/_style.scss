@@ -1,5 +1,6 @@
 // nav toggle
 body{
+  min-height: 1126px;
   .container{
     margin: 0 auto;
     width: 90%;
@@ -89,7 +90,7 @@ nav{
         font-weight: bold;
         width: 100%;
         text-align: center;
-
+        @extend %overflow-clamp;
         &:after{
           content: '';
           position: absolute;
@@ -148,73 +149,45 @@ main{
   // stepper
   .stepper{
     display: grid;
-    grid-template-columns: repeat(3 , 1fr);
-    grid-template-rows: 32px;
-    justify-content: center;
+    grid-template-columns: repeat( 3 , 1fr);
+    grid-template-rows: 2rem;
     .step{
       position: relative;
-      .label__container{
-        display: none;
-      }
+      display: flex;
+      @include getStepNums(3);
       .circle__container{
+        @extend %flex-center;
         height: 2rem;
         width: 2rem;
-        border: 1px solid var(--unselected-step);
-        color: var(--unselected-step);
         border-radius: 50%;
+        border: 1px solid var(--unselected-step);
+        color: var(--unselected-step);  
       }
-    }
-    :nth-child(1){
-      .circle__container{
+      .label__container{
+        display: none;
+      }   
+      .connect__line{
         position: absolute;
-        left: 0;
-        &:after{
-          content:'1';
-          position: absolute;
-          @extend %position-center;
-        }
+        height: 1px;
+        background-color: var(--selected-step);
+        top:50%;
       }
     }
     :nth-child(2){
-      position: relative;
-      display: flex;
       justify-content: center;
-      .circle__container{
-        &:after{
-          content:'2';
-          position: absolute;
-          @extend %position-center;
-        }
-      }
       .connect__line{
-        position: absolute;
-        height: 1px;
-        top:50%;
-        left:calc(-100% + 50px);
-        right:calc(50% + 38px);
-        background-color: var(--selected-step);
+        left: -50%;
+        right: 100%;
       }
     }
     :nth-child(3){
-      .circle__container{
-        position: absolute;
-        right: 0;
-        &:after{
-          content:'3';
-          position: absolute;
-          @extend %position-center;
-        }
-      }
+      justify-content: flex-end;
       .connect__line{
-        position: absolute;
-        height: 1px;
-        top:50%;
-        left:calc(-50% + 38px);
-        right:50px;
-        background-color: var(--selected-step);
+        left: -10%;
+        right: 50%;
       }
     }
-    div.step{
+     div.step{
       &.active{
         .circle__container, .connect__line{
         border: 1px solid var(--selected-step);
@@ -225,7 +198,7 @@ main{
         .circle__container{
           color: $white;
           background-color: #333333;
-          &:after{
+          &::after{
             content:'\2714'
           }
         }
@@ -398,7 +371,7 @@ main{
           font-size: 14px;
         }
         button:nth-of-type(1){   
-          // display: none;     
+          display: none;     
           color: var(--body-color);
           text-align: left;
         }
@@ -436,6 +409,9 @@ main{
               display: flex;
               flex-direction: column;
               align-items: flex-end;
+              .item__name{
+                @extend %overflow-clamp;
+              }
               .item__quantity{
                 display: grid;
                 grid-auto-flow: column;
@@ -484,57 +460,11 @@ main{
   }
 }
 
-// footer
-footer{
-  width: 100vw;
-  background-color: var(--footer-bg);
-  .container{
-    display: grid;
-    grid-template-rows: 300px;
-    grid-template-columns: repeat ( 12 , 1fr ); 
-    align-items: center;
-    .footer__logo{
-      grid-row: 1/2;
-      grid-column: 1 / span 3;
-      width: 135.85px;
-      height: 24px;
-      background: var(--logo-url);
-      background-size: cover;
-    }
-    .footer__items{
-      grid-column: 4 / 13;
-      display: flex;
-      justify-content: space-evenly;
-      .footer__item{
-        .footer__links{
-          display: flex;
-          flex-direction: column;
-          margin: 5px 0;
-          color: var(--footer-color);
-          span{
-            margin-top: 5px;
-          }
-          .footer__link{
-            color: var(--footer-color);
-            margin-top: 5px;
-          }
-          .social__media{
-              display: flex;
-              margin-top: 10px;
-              .footer__link:not(:last-of-type){
-                margin-right: 10px;
-              }    
-          }
-        }
-      }
-    }
-  }
-}
+
 
 @media screen and (min-width: 376px){
   body{
     max-width: 1440px;
-    min-height: 1126px;
     margin: 0 auto;
     .container{
       width: 80%;
@@ -555,20 +485,21 @@ footer{
       all:unset;
       display: grid;
       grid-template-rows: 1fr;
-      grid-template-columns: repeat ( 12 , 1fr );
-      grid-gap: 1rem;
+      grid-template-columns: 1fr auto 1fr;
+      grid-gap: 3rem;
       align-items: center;
       height: 100%;
       .nav__links{
         all:unset;
+        grid-column: 1 / 2;
         grid-row: 1 / 2;
-        grid-column: 1 / 6;
+        justify-self: center;
         display: grid;
         grid-auto-flow: column;
-        justify-content: start;
         grid-gap: 2rem;       
         .nav__link{
           all:unset;
+          @include overflow-clamp;
           &:after{
           all:unset;
           }
@@ -580,20 +511,21 @@ footer{
         height: 24px;
         background: var(--logo-url);
         background-size: cover;
-        grid-area: 1 / span 2 / 2 / 7;
+        grid-area: 1 / 2 / 2 / 3;
       }
       .nav__icons{
         all:unset;
         grid-row: 1 / 2;
-        grid-column: span 2 / 13;
-        width: 132px;
+        grid-column: 3 / 4;
         height: 24px;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        justify-content: flex-end;
         opacity:1;
         .nav__icon{
           margin:unset;
+        }
+        div:not(:last-of-type){
+          margin-right: 2rem;
         }
       }
     }
@@ -616,28 +548,23 @@ footer{
         flex-basis: 60%;
         // stepper
         .stepper{
-
           .step{
-            .circle__container{
-              left: 0;
-            }
+            align-items: center;
             .label__container{
-              display: initial;
-              position: absolute;
-              left: 40px;
-              line-height: 2rem;
-            }
-            .connect__line{
-              left: calc(-50% + 30px);
-              right: calc(100% + 30px);
+              @include overflow-clamp;
+              margin: 0 0.5rem;
             }
           }
           :nth-child(2){
-            justify-content: flex-start;
-            .circle__container{
-              &:after{
-                left: 1rem;
-              }
+            .connect__line{
+              left: -30%;
+              right: 100%;
+            }
+          }
+          :nth-child(3){
+            .connect__line{
+              left: -10%;
+              right: 80%;
             }
           }
         }
@@ -735,8 +662,9 @@ footer{
         }
       }
       .content__right{
-        flex-grow: 1;
+        flex: 1;
         margin-left: 3rem;
+        overflow: hidden;
         .cart{
           .cart__title{
             display: block;
@@ -761,12 +689,60 @@ footer{
       }
     }
   }
+
+
   // footer
-  .footer{
-    max-width: 1440px;
-    position:absolute;
-    bottom: 0;
-    display: block;
-    margin-top: 10rem;
+.footer{
+  width: 100%;
+  position:absolute;
+  bottom: 0;
+  display: block;
+  margin-top: 10rem;
+  background-color: var(--footer-bg);
+  .container{
+    display: grid;
+    grid-template-rows: 300px;
+    grid-template-columns: repeat ( 12 , 1fr ); 
+    align-items: center;
+    .footer__logo{
+      grid-row: 1/2;
+      grid-column: 1 / span 3;
+      width: 135.85px;
+      height: 24px;
+      background: var(--logo-url);
+      background-size: cover;
+    }
+    .footer__items{
+      grid-column: 4 / 13;
+      display: flex;
+      justify-content: space-evenly;
+      .footer__item{
+        .footer__title{
+         @include overflow-clamp;
+        }
+        .footer__links{
+          display: flex;
+          flex-direction: column;
+          margin: 5px 0;
+          color: var(--footer-color);
+          span{
+            margin-top: 5px;
+          }
+          .footer__link{
+            @include overflow-clamp;
+            color: var(--footer-color);
+            margin-top: 5px;
+          }
+          .social__media{
+              display: flex;
+              margin-top: 10px;
+              .footer__link:not(:last-of-type){
+                margin-right: 10px;
+              }    
+          }
+        }
+      }
+    }
   }
+}
 }
