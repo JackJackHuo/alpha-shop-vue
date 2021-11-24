@@ -55,23 +55,10 @@ import CustomerInfo from "../components/CustomerInfo.vue";
 import Shipment from "../components/Shipment.vue";
 import Payment from "../components/Payment.vue";
 import Cart from "../components/Cart.vue";
+import {dummyData as data} from "../data/dummy.js"
 
-const dummyData = [
-  {
-    id: 1,
-    name: '破壞補釘修身牛仔褲',
-    image: '/img/Block@jean1.5b574c1f.png',
-    quantity: 5,
-    price:3999
-  },
-  {
-    id: 2,
-    name: '刷色直筒牛仔褲',
-    image: '/img/Block@jean2.ca91e9b3.png',
-    quantity: 3,
-    price:1299
-  },
-]
+
+
 export default {
   name: "Checkout",
   components: {
@@ -93,7 +80,7 @@ export default {
   },
   methods: {
     fetchCartData() {
-      this.cartItems = [...dummyData]
+      this.cartItems = [...data]
     },
     handlePrevBtnClicked() {
       this.currentStep = this.currentStep - 1
