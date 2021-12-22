@@ -17,7 +17,10 @@
           <input type="text" name="" id="" class="d-none" />
           <div class="nav__icon icon__search"></div>
           <div class="nav__icon icon__cart"></div>
-          <div class="nav__icon icon__darkMode--toggle"></div>
+          <div
+            @click="handleClickeddarkMode"
+            class="nav__icon icon__darkMode--toggle"
+          ></div>
         </div>
       </div>
       <a href="#" class="nav__logo"></a>
@@ -27,7 +30,23 @@
 
 <script>
 export default {
-  name: 'Navbar'
-}
+  name: "Navbar",
+  data() {
+    return {
+      darkmode: false,
+    };
+  },
+  methods: {
+    handleClickeddarkMode() {
+      if (this.darkmode) {
+        document.documentElement.setAttribute("data-theme", "light");
+        this.darkmode = false
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        this.darkmode = true
+      }
+    },
+  },
+};
 </script>
 
