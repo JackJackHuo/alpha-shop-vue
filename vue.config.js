@@ -13,7 +13,10 @@ module.exports = {
         `
       }
     }
-  }
+  },
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/alpha-shop-vue/'
+    : '/'
 };
 
 /* No need to import, it just works \o/ */
